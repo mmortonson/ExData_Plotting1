@@ -13,23 +13,17 @@ data <- read.table(data.file, skip = 66637, nrows = 2880,
 # get column names from the header
 names(data) <- names(read.table(data.file, nrows = 1,
                                 header = TRUE, sep = ";"))
-# get time in POSIXlt class from Date and Time columns
-time <- strptime(paste(data$Date, data$Time), 
-                 format = "%d/%m/%Y %H:%M:%S")
 
-# set transparent background to match reference plot
-par(bg = NA)
-
-# plot histogram of global active power
-# - use cex arguments to rescale font sizes to match the
-#   reference plot more closely
-hist(data$Global_active_power, col = "red", 
-     xlab = "Global Active Power (kilowatts)", 
-     ylab = "Frequency", main = "Global Active Power",
-     cex.axis = 0.75, cex.lab = 0.75, cex.main = 0.9)
-
-# save plot in PNG file
+# open PNG device
 # - width and height are set to the default of 480 pixels as
 #   instructed (even though the reference plot is 504x504)
-dev.copy(png, filename = "plot1.png")
+# - set transparent background to match reference plot
+png("plot1.png", bg = NA)
+
+# plot histogram of global active power
+hist(data$Global_active_power, col = "red", 
+     xlab = "Global Active Power (kilowatts)", 
+     ylab = "Frequency", main = "Global Active Power")
+
+# close PNG device
 dev.off()
