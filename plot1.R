@@ -17,17 +17,19 @@ names(data) <- names(read.table(data.file, nrows = 1,
 time <- strptime(paste(data$Date, data$Time), 
                  format = "%d/%m/%Y %H:%M:%S")
 
+# set transparent background to match example plot
+par(bg = NA)
+
 # plot histogram of global active power
 # - use cex arguments to rescale font sizes to match the
 #   example plot more closely
 hist(data$Global_active_power, col = "red", 
-     xlab = "Global active power (kilowatts)", 
+     xlab = "Global Active Power (kilowatts)", 
      ylab = "Frequency", main = "Global Active Power",
      cex.axis = 0.75, cex.lab = 0.75, cex.main = 0.9)
 
 # save plot in PNG file
 # - width and height are set to the default of 480 pixels as
 #   instructed (even though the example plot is 504x504)
-# - set transparent background to match example plot
-dev.copy(png, filename = "plot1.png", bg = NA)
+dev.copy(png, filename = "plot1.png")
 dev.off()
