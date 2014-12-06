@@ -1,4 +1,5 @@
-# Create Plot 4: four panels
+# Create Plot 4: Four panels, each showing
+# one or more variables vs. datetime
 
 data.file <- "household_power_consumption.txt"
 if(!file.exists(data.file)) stop("Couldn't find file: ",
@@ -19,8 +20,8 @@ time <- strptime(paste(data$Date, data$Time),
 
 # open PNG device
 # - width and height are set to the default of 480 pixels as
-#   instructed (even though the example plot is 504x504)
-# - set transparent background to match example plot
+#   instructed (even though the reference plot is 504x504)
+# - set transparent background to match reference plot
 png("plot4.png", bg = NA)
 
 # set up 2x2 plot, filled column-wise
@@ -34,8 +35,6 @@ lines(time, data$Global_active_power)
 
 # lower left panel
 # plot sub metering variables vs. time
-# - use cex arguments to rescale font sizes to match the
-#   example plot more closely
 plot(time, data$Sub_metering_1, type = "n",
      xlab = "", ylab = "Energy sub metering")
 lines(time, data$Sub_metering_1, col = "black")
